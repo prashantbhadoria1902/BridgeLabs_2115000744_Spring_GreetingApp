@@ -23,4 +23,9 @@ public class GreetingService {
     public Optional<Greeting> findGreetingById(Long id) {
         return greetingRepository.findById(id);
     }
+
+    public List<Greeting> findAllGreetings() {
+        return greetingRepository.findAll();
+    }
+
 }

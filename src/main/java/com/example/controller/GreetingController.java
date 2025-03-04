@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,4 +34,10 @@ public class GreetingController {
                 g -> ResponseEntity.ok("Hello, " + g.getFirstName() + " " + g.getLastName() + "! " + g.getMessage()))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping
+    public ResponseEntity<List<Greeting>> getAllGreetings() {
+        return ResponseEntity.ok(greetingService.findAllGreetings());
+    }
+
 }
