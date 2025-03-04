@@ -2,38 +2,27 @@ package com.example.controller;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.example.model.Greeting;
+import com.example.service.GreetingService;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/greeting")
+@RequestMapping("/greetings")
 public class GreetingController {
+    private final GreetingService greetingService;
 
-    @GetMapping
-    public Map<String, String> getGreeting() {
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Hello, GET Request!");
-        return response;
+    public GreetingController(GreetingService greetingService) {
+        this.greetingService = greetingService;
     }
 
     @PostMapping
-    public Map<String, String> postGreeting() {
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Hello, POST Request!");
-        return response;
+    public Greeting addGreeting(@RequestBody Greeting greeting) {
+        return greetingService.saveGreeting(greeting);
     }
 
-    @PutMapping
-    public Map<String, String> putGreeting() {
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Hello, PUT Request!");
-        return response;
-    }
-
-    @DeleteMapping
-    public Map<String, String> deleteGreeting() {
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Hello, DELETE Request!");
-        return response;
+    @GetMapping
+    public List<Greeting> getGreetings() {
+        return greetingService.getAllGreetings();
     }
 }
