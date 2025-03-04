@@ -28,8 +28,16 @@ public class Greeting {
         return firstName;
     }
 
+    public void setFirstName(String firstName) { // ✅ Added setter
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public void setLastName(String lastName) { // ✅ Added setter
+        this.lastName = lastName;
     }
 
     public String getMessage() {
