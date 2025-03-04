@@ -28,4 +28,12 @@ public class GreetingService {
         return greetingRepository.findAll();
     }
 
+    public boolean deleteGreetingById(Long id) {
+        if (greetingRepository.existsById(id)) {
+            greetingRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
 }

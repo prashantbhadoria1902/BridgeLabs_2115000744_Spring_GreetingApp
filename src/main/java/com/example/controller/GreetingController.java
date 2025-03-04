@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +53,16 @@ public class GreetingController {
             greeting.setMessage(updatedGreeting.getMessage());
 
             return ResponseEntity.ok(greetingService.saveGreeting(greeting));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteGreeting(@PathVariable Long id) {
+        boolean deleted = greetingService.deleteGreetingById(id);
+        if (deleted) {
+            return ResponseEntity.ok("Greeting deleted successfully.");
         } else {
             return ResponseEntity.notFound().build();
         }
