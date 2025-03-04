@@ -1,14 +1,19 @@
 package com.example.controller;
 
-import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Greeting;
 import com.example.service.GreetingService;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/greetings")
+@RequestMapping("/greetings") // Ensure this matches the Postman URL
 public class GreetingController {
     private final GreetingService greetingService;
 
@@ -16,13 +21,16 @@ public class GreetingController {
         this.greetingService = greetingService;
     }
 
-    @PostMapping
-    public Greeting addGreeting(@RequestBody Greeting greeting) {
+    @PostMapping // Ensure this exists for POST request
+    public Greeting createGreeting(@RequestBody Greeting greeting) {
         return greetingService.saveGreeting(greeting);
     }
 
-    @GetMapping
-    public List<Greeting> getGreetings() {
-        return greetingService.getAllGreetings();
+    @GetMapping("/{id}/message")
+    public ResponseEntity<String> getGreetingMessage(@PathVariable Long id) {
+        Optional<Greeting> greeting = greetingService.findGreetingById(id);
+        return greeting.map(
+                g -> ResponseEntity.ok("Hello, " + g.getFirstName() + " " + g.getLastName() + "! " + g.getMessage()))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

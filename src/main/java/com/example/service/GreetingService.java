@@ -6,6 +6,7 @@ import com.example.model.Greeting;
 import com.example.repository.GreetingRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GreetingService {
@@ -19,7 +20,7 @@ public class GreetingService {
         return greetingRepository.save(greeting);
     }
 
-    public List<Greeting> getAllGreetings() {
-        return greetingRepository.findAll();
+    public Optional<Greeting> findGreetingById(Long id) {
+        return greetingRepository.findById(id);
     }
 }
