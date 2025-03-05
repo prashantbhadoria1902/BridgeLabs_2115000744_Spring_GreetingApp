@@ -1,10 +1,10 @@
-package com.example;
+package com.example.userAuthentication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringGreetingAppApplicationTests {
+class UserAuthenticationApplicationTests {
 
 	@Test
 	void contextLoads() {
