@@ -13,15 +13,17 @@ public class Greeting {
     private Long id;
     private String firstName;
     private String lastName;
+    private String message;
 
     // Default constructor
     public Greeting() {
     }
 
     // Parameterized constructor
-    public Greeting(String firstName, String lastName) {
+    public Greeting(String firstName, String lastName, String message) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.message = message;
     }
 
     // Getters and Setters
@@ -48,4 +50,13 @@ public class Greeting {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String lastName) {
+        this.message = message;
+    }
+
 }
